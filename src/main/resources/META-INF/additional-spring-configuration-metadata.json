@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "hibernate.transaction.jta.platform",
+  "type": "java.lang.String",
+  "description": "A description for 'hibernate.transaction.jta.platform'"
+}]}
