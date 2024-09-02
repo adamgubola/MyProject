@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+
+<title>Simple Theme</title>
+<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+</div>
+    <nav class="secondary_header" id="menu">
+      <ul class="headLinks">
+        <li class="headLinks">Bemutatkozás</li>
+        <li>Belépés</li>
+        <li>Regisztráció</li>
+      </ul>
+	</nav>
+	
+<div layout:fragment= "alert-exception">
+  <form th:action="@{/searchWish}" method="post">
+    <div class="search"><input class="search-box" type="text" name="query" placeholder="Keresés" ><button class="search-button" type="submit">Keresés</button></div>
+  </form>
+  <div th:if="${message}" th:text="${message}" id="alert-message" class="alert-message"></div>
+  <div th:if="${error}" th:text="${message}" id="alert-message" class="alert-message"></div>
+  </div>
+
+<div layout:fragment="wishes" class="table">
+  <table class="columnRow">
+    <div id="savedMoneyPopUp" class="columns_popup"></div>
+
+    <tr class="table_header">
+      <th>Where i find it?</th>
+      <th>My wish</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>My saved money</th>
+    </tr>
+    <tr th:each="wish, iterStat :${wishes}">
+    	<form name="updateWish" th:action="@{/updateWish/{id}(id=${wish.id})}" th:object="${wish}" method="post">
+    	
+      <td><div class="columns" th:text="${wish.place}">Aréna plázában</div>
+          <div><input  th:value="${wish.place}" type="text" th:id="place" th:name="place"  class="columns-update"/></div>        
+      </td>
+      <td><div class="columns" th:text="${wish.what}">Nike futócipő</div>
+      	  <div><input  th:value="${wish.what}" type="text" th:id="what" th:name="what" class="columns-update" /></div>
+      </td>
+      <td><div  class="columns" th:text="${wish.description}">Fehér és kék színű aminek nem is tudom hogy milyen szar van a tetején</div>
+          <div><input  th:value="${wish.description}" type="text" th:id="description" th:name="description" class="columns-update" /></div>
+      </td>
+      <td><div th:id="'priceIn_' + ${iterStat.index}" class="columns" th:text="${wish.price}">33000 Ft</div>
+          <div><input th:value="${wish.price}" type="text" th:id="price" th:name="price" class="columns-update"  />
+          <p th:if="${#fields.hasErrors('price')}" class="alert alert-danger" th:errors="*{price}"></p>
+          </div>
+       </td>
+      <td><div th:id="'savedMoneyIn_' + ${iterStat.index}" class="columns" th:text="${wish.savedMoney}"> 0 Ft</div>
+      	  <div><input th:value="${wish.savedMoney}" value="0" type="text" th:id="savedMoney" th:name="savedMoney" class="columns-update" />
+          <p th:if="${#fields.hasErrors('savedMoney')}" class="alert alert-danger" th:errors="*{savedMoney}"></p>
+        </div>
+      <td>
+          <button class="columns-button-update" type="submit" onclick="return confirm('Biztosan meg szeretnéd változtatni?')" > Frissítés </button> 
+        </form>
+        <form name="delWish" th:action="@{/delWish/{id}(id=${wish.id})}" th:object="${wish}" method="post" >
+          <input type="hidden" th:field="${wish}">
+          <button class="columns-button-del" type="submit" onclick="return confirm('Biztos tötölni szeretnéd?')" > Törlés </button> 
+        </form>
+      </td> 
+    </tr>
+
+	<form name="addWish" th:action="@{/addWish}" th:object="${wish}" method="post" >
+      <tr>
+        <td><div>
+        <input type="text" id="place" name="place" th:field="*{place}" class="columns-input" placeholder="Where i find it?"/>        
+        </div></td>
+        <td>
+        <div><input type="text" id="what" name="what" th:field="*{what}" class="columns-input" placeholder="My wish"/>
+        </div></td>
+        <td>
+        <div><input type="text" id="description" name="description" th:field="*{description}" class="columns-input" placeholder="Description"/>
+        </div></td>
+        <td>
+        <div><input value="0" type="text" id="price" name="price" th:field="*{price}" class="columns-input" placeholder="Price"/>
+        <p th:if="${#fields.hasErrors('price')}" class="alert alert-danger" th:errors="*{price}"></p>
+        </div></td>
+        <td>
+        <div><input value="0" type="text" id="savedMoney" name="savedMoney" th:field="*{savedMoney}" class="columns-input" placeholder="My saved money"/>
+        <p th:if="${#fields.hasErrors('savedMoney')}" class="alert alert-danger" th:errors="*{savedMoney}"></p>
+        </div></td>
+        <td>
+        <div><button class="columns-button" type="submit"> Hozzáadás a kívánságlistához </button>
+        </div></td>
+      </tr>
+      </form>
+  </table>
+</div>
+
+
+  
+  <footer class="secondary_header footer">
+    <div class="copyright">&copy;2024 - <strong>Gubola Ádám honlapja</strong></div>
+  </footer>
+</div>
+<script src="../static/js/script.js"></script>
+</body>
+</html>
