@@ -30,12 +30,12 @@ public class EmailService  {
 			message.setTo(email);
 			message.setSubject("Aktiváció");
 			message.setText("Kedves "+ lastName+ "!" 
-					+ "\n\n "
+					+ "\n\n"
 					+ "Örülök hogy regisztráltál az oldalamra. "
 					+ "Remélem elnyeri tetszésedet."
 					+ "Hogy az alkalmazásokat használhasd, kérlek regisztrálj az alábbi kóddal: " 
 					+ activation
-					+ "\n "
+					+ "\n"
 					+ "Bármilyen javaslatod van a látottakkal kapcsolatban,"
 					+ "kérlek jelezd nekem ezen az email címen."
 					+ "\n\n"
@@ -44,11 +44,13 @@ public class EmailService  {
 					+ "Ádám"
 					);
 			javaMailSender.send(message);
+			
+			return "Az aktivációs emailt sikeresen elküldtem!";
+
 
 		} catch (Exception e) {
 			System.err.println("Hiba az email elküldése során erre a címre " + email);
 			return "Hiba az email elküldése során erre a címre " + email;
 		}
-		return"Az aktivációs emailt sikeresen elküldtem!";
 	}
 }

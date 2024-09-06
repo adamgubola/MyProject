@@ -86,11 +86,11 @@ public class MainController {
 		user.setPassword(userDto.getPassword());		
 		
 		
-		String message=userService.registerUser(user);
-		String errorMessage=emailService.sendMessage(user.getFirstName(), user.getLastName(), user.getEmail(), user.getActivation());
+		String messageFlash=userService.registerUser(user);
+		redirectAttributes.addFlashAttribute("messageFlash", messageFlash);
 
-		redirectAttributes.addFlashAttribute("error", errorMessage);
-		redirectAttributes.addFlashAttribute("message", message);
+		String errorFlash=emailService.sendMessage(user.getFirstName(), user.getLastName(), user.getEmail(), user.getActivation());
+		redirectAttributes.addFlashAttribute("errorFlash", errorFlash);
 					
 		return "redirect:/activate";
 	}
@@ -104,12 +104,12 @@ public class MainController {
 	@PostMapping("/activ")
 	public String activ(@ModelAttribute User user, Model model, RedirectAttributes redirectAttributes) {
 		
-		String message=	userService.userActivation(user.getActivation());
+		String messageFlash=userService.userActivation(user.getActivation());
 		
-		redirectAttributes.addFlashAttribute("message",message);
+		redirectAttributes.addFlashAttribute("messageFlash",messageFlash);
 
 
-		return "redirect:auth/login";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/wishes")
@@ -137,8 +137,9 @@ public class MainController {
 			if(bindingResult.hasErrors()) {
 			return "wishes";
 			}
-			String message=	wishService.addWish(wish, userDetails);
-			model.addAttribute("message", message);
+			String messageFlash=wishService.addWish(wish, userDetails);
+			model.addAttribute("messageFlash", messageFlash);
+			
 			User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 			model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 			model.addAttribute("wish", new Wish());
@@ -149,8 +150,9 @@ public class MainController {
 	@PostMapping("/delWish/{id}")
 		public String delWish(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		
-		String message=wishService.deleteById(id);
-		model.addAttribute("message", message);
+		String messageFlash=wishService.deleteById(id);
+		model.addAttribute("messageFlash", messageFlash);
+		
 		User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 		model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 		model.addAttribute("wish", new Wish());
@@ -165,8 +167,8 @@ public class MainController {
 		if(bindingResult.hasErrors()) {
 			return "wishes";
 			}
-		String message = wishService.updateWish(id, wish);
-		model.addAttribute("message", message);
+		String messageFlash = wishService.updateWish(id, wish);
+		model.addAttribute("messageFlash", messageFlash);
 		
 		User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 		model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
@@ -190,13 +192,13 @@ public class MainController {
 			model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 			model.addAttribute("wish", new Wish());
 
-			model.addAttribute("message", "A keresés nem vezetett eredményre!");
+			model.addAttribute("messageFlash", "A keresés nem vezetett eredményre!");
 			return "wishes";
 		}else {
 			model.addAttribute("wishes",searchedWish);
 			model.addAttribute("wish", new Wish());
 
-			model.addAttribute("message", "A keresés eredménye: ");
+			model.addAttribute("messageFlash", "A keresés eredménye: ");
 			return "wishes";
 		}
 	}
