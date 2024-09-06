@@ -40,8 +40,8 @@
     </ul>
   </nav>
   
-  <div th:if="${message}" th:text="${message}" id="alert-message" class="alert-message"></div>
-  <div th:if="${error}" th:text="${errorMessage}" id="alert-error" class="alert-error"></div>
+  <div th:if="${messageFlash}" th:text="${messageFlash}" id="alert-message" class="alert-message"></div>
+  <div th:if="${errorFlash}" th:text="${errorFlash}" id="alert-error" class="alert-error"></div>
   
   
   <div layout:fragment="search-bar"></div>
@@ -57,7 +57,7 @@
   <div class="social">
   	
     <p class="social_icon"><a href="https://www.linkedin.com/in/adam-gubola-136603307/" target="blank_"><img src="../../static/pictures/linkedin.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/> </a></p>
-       <p class="social_icon"><a href="https://github.com/adamgubola/MyProject"><img src="../../static/pictures/Git.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
+       <p class="social_icon"><a href="https://github.com/adamgubola/MyProject" target="blank"><img src="../../static/pictures/Git.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
     <p class="social_icon"><a href="https://www.facebook.com/adam.gubola.1" target="blank"> <img src="../../static/pictures/facebook.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
   </div>
   <footer class="secondary_header footer">

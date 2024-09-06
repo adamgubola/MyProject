@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		if(user==null) {
 			System.out.println("Ez az aktivációs kód nem található, kérlek ellenőrizd a kódot! ");
 			
-			return "noResult";
+			return "Ez az aktivációs kód nem található, kérlek ellenőrizd a kódot!";
 		}
 		user.setEnabled(true);
 		user.setActivation("");
