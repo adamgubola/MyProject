@@ -19,13 +19,10 @@
       </ul>
 	</nav>
 	
-<div layout:fragment= "alert-exception">
+<div layout:fragment= "search-bar">
   <form th:action="@{/searchWish}" method="post">
     <div class="search"><input class="search-box" type="text" name="query" placeholder="Keresés" ><button class="search-button" type="submit">Keresés</button></div>
   </form>
-  <div th:if="${message}" th:text="${message}" id="alert-message" class="alert-message"></div>
-  <div th:if="${error}" th:text="${message}" id="alert-message" class="alert-message"></div>
-  </div>
 
 <div layout:fragment="wishes" class="table">
   <table class="columnRow">

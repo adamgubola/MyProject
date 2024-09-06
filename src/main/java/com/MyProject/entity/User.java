@@ -26,19 +26,12 @@ public class User {
 	@Column(name = "user_id")
 	private Long id;
 	
-	@Size(min=2, max=20, message = "A felhasználónévnek legalább 4 és maximum 20 karakternek kell lennie")
 	private String firstName;
 	
-	@Column(nullable = false)
-	@Size(min=2, max=20, message = "A felhasználónévnek legalább 4 és maximum 20 karakternek kell lennie")
 	private String lastName;
 	
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{4,}$", message = "A jelszónak legalább 4 karakter hosszúnak kell lennie,"
-			+ "tartalmaznia kell legalább 1 kisbetűt, 1 nagybetűt és egy számot")
 	private String password;
 	
-	@Email(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Nem megfelelő emailcím. Minta: MintaBela@gmail.com")
-	@Column(unique = true, nullable = false)
 	private String email;
 	
 	@ManyToMany( fetch = FetchType.EAGER)

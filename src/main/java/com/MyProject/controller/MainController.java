@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.MyProject.entity.User;
+import com.MyProject.entity.UserDto;
 import com.MyProject.entity.Wish;
 import com.MyProject.service.EmailService;
 import com.MyProject.service.UserService;
@@ -67,26 +69,30 @@ public class MainController {
 	
 	@GetMapping("/registration")
 	public String registration(Model model) {
-		model.addAttribute("user", new User());
+		model.addAttribute("userDto", new UserDto());
 		return "registration";
 	}
 	
 	@PostMapping("/reg")
-	public String reg(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
+	public String reg(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		log.info("Új user regisztráció");
 		if(bindingResult.hasErrors()) {
 			return "registration";
 		}
-		userService.registerUser(user);
-		emailService.sendMessage(user.getFirstName(), user.getLastName(), user.getEmail(), user.getActivation());
+		User user= new User();
+		user.setEmail(userDto.getEmail());
+		user.setFirstName(userDto.getFirstName());
+		user.setLastName(userDto.getLastName());
+		user.setPassword(userDto.getPassword());		
 		
-		user.setActivation("");
+		
 		String message=userService.registerUser(user);
+		String errorMessage=emailService.sendMessage(user.getFirstName(), user.getLastName(), user.getEmail(), user.getActivation());
 
-		model.addAttribute("message", message);
-
-				
-		return "/activate";
+		redirectAttributes.addFlashAttribute("error", errorMessage);
+		redirectAttributes.addFlashAttribute("message", message);
+					
+		return "redirect:/activate";
 	}
 	
 	@GetMapping("/activate")
@@ -96,13 +102,14 @@ public class MainController {
 	}
 	
 	@PostMapping("/activ")
-	public String activ(@ModelAttribute User user, Model model) {
-		userService.userActivation(user.getActivation());
+	public String activ(@ModelAttribute User user, Model model, RedirectAttributes redirectAttributes) {
+		
 		String message=	userService.userActivation(user.getActivation());
-		model.addAttribute("message", message);
+		
+		redirectAttributes.addFlashAttribute("message",message);
 
 
-		return "auth/login";
+		return "redirect:auth/login";
 	}
 	
 	@GetMapping("/wishes")
@@ -130,26 +137,24 @@ public class MainController {
 			if(bindingResult.hasErrors()) {
 			return "wishes";
 			}
-			wishService.addWish(wish, userDetails);
+			String message=	wishService.addWish(wish, userDetails);
+			model.addAttribute("message", message);
 			User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 			model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 			model.addAttribute("wish", new Wish());
-			String message=	wishService.addWish(wish, userDetails);
-			model.addAttribute("message", message);
-
-		
+			
 			return "wishes";
 		}
 	
 	@PostMapping("/delWish/{id}")
 		public String delWish(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		
-		wishService.deleteById(id);
+		String message=wishService.deleteById(id);
+		model.addAttribute("message", message);
 		User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 		model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 		model.addAttribute("wish", new Wish());
-		String message=wishService.deleteById(id);
-		model.addAttribute("message", message);
+		
 		
 		return "wishes";
 	}
@@ -160,13 +165,13 @@ public class MainController {
 		if(bindingResult.hasErrors()) {
 			return "wishes";
 			}
-		wishService.updateWish(id, wish);
+		String message = wishService.updateWish(id, wish);
+		model.addAttribute("message", message);
 		
 		User autetichatedUser= userService.findByEmail(userDetails.getUsername());
 		model.addAttribute("wishes", wishService.findAllByUserId(autetichatedUser.getId()));
 		model.addAttribute("wish", new Wish());
-		String message = wishService.updateWish(id, wish);
-		model.addAttribute("message", message);
+		
 		
 		return "wishes";
 	}
