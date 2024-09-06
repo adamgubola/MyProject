@@ -18,10 +18,11 @@
         <li>Regisztráció</li>
       </ul>
 	</nav>
+	
 		
-		<div layout:fragment="register">
+	<div layout:fragment="register" class="register">
 		
-		<form name="registration" th:action="@{/reg}" th:object="${user}" method="post" class="form-signin">
+		<form name="registration" th:action="@{/reg}" th:object="${userDto}" method="post" class="form-signin">
 			<h2 class="form-signin-heading">Kérlek Regisztrálj</h2>
 			<div>
 			<input type="text" id="firstName" name="firstName" th:field="*{firstName}" class="form-control" placeholder="Vezetéknév"/>
@@ -36,8 +37,16 @@
 			<p th:if="${#fields.hasErrors('email')}" class="alert alert-danger" th:errors="*{email}"></p>
 			</div>
 			<div>
+			<input type="text" id="confirmEmail" name="confirmEmail" th:field="*{confirmEmail}" class="form-control" placeholder="Megerősítő email cím"/>
+			<p th:if="${#fields.hasErrors('confirmEmail')}" class="alert alert-danger" th:errors="*{confirmEmail}"></p>
+			</div>
+			<div>
 			<input type="password" id="password" name="password" th:field="*{password}" class="form-control" placeholder="Jelszó"/>
 			<p th:if="${#fields.hasErrors('password')}" class="alert alert-danger" th:errors="*{password}"></p>
+			</div>
+			<div>
+			<input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" class="form-control" placeholder="Megerősítő jelszó"/>
+			<p th:if="${#fields.hasErrors('confirmPassword')}" class="alert alert-danger" th:errors="*{confirmPassword}"></p>
 			</div>
 
 			<button class="form-button" type="submit"> Regisztráció </button>

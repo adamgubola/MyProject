@@ -39,9 +39,14 @@
       <li><a href="/wishes">Kívánságlista</a> </li>
     </ul>
   </nav>
-  <div layout:fragment="alert-exception"></div>
-  <section layout:fragment="introduce"></section>
+  
+  <div th:if="${message}" th:text="${message}" id="alert-message" class="alert-message"></div>
+  <div th:if="${error}" th:text="${errorMessage}" id="alert-error" class="alert-error"></div>
+  
+  
+  <div layout:fragment="search-bar"></div>
   <br/>
+  <section layout:fragment="introduce"></section>
   <div layout:fragment="loginContent"></div>
   <div layout:fragment="register"></div>
   <div layout:fragment="wishes" > </div>
@@ -51,9 +56,9 @@
   <br/>
   <div class="social">
   	
-    <p class="social_icon"><a href="" target="blank_"><img src="../../static/pictures/profession.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/> </a></p>
-       <p class="social_icon"><img src="../../static/pictures/indeed.jpg" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></p>
-    <p class="social_icon"><img src="../../static/pictures/facebook.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></p>
+    <p class="social_icon"><a href="https://www.linkedin.com/in/adam-gubola-136603307/" target="blank_"><img src="../../static/pictures/linkedin.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/> </a></p>
+       <p class="social_icon"><a href="https://github.com/adamgubola/MyProject"><img src="../../static/pictures/Git.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
+    <p class="social_icon"><a href="https://www.facebook.com/adam.gubola.1" target="blank"> <img src="../../static/pictures/facebook.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
   </div>
   <footer class="secondary_header footer">
     <div class="copyright">&copy;2024 - <strong>Gubola Ádám honlapja</strong></div>

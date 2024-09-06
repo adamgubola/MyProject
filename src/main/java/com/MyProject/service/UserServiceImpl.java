@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userRepository.save(user);
 		System.out.println("Az aktiváció sikeres volt!");
 		
-		return code;
+		return "Az aktiváció sikeres volt!" ;
 	}
 	}
 	

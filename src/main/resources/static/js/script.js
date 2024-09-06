@@ -4,8 +4,8 @@
  const savedMoneyPopUp = document.getElementById("savedMoneyPopUp");
  
  savedMoneyElements.forEach((savedMoney) => {
-	 const index = savedMoney.id.split('_').pop(); // Az index kiválasztása az ID-ból
-	 const price = document.getElementById(`priceIn_${index}`); // A megfelelő 'price' elem kiválasztása
+	 const index = savedMoney.id.split('_').pop(); 
+	 const price = document.getElementById(`priceIn_${index}`); 
  
 	 if (!price) {
 		 console.error(`A price elem nem található az index alapján: ${index}`);
@@ -87,4 +87,21 @@ function alertMessageHide(){
 		},5000);
 	}
 }
+
+function alertErrorHide(){
+	const errorElement= document.getElementById('alert-error');
+
+
+	if(errorElement ){
+		console.log('Van message element')
+
+		setTimeout(()=>{
+			errorElement.style.display='none';
+		},5000);
+	}
+}
 document.addEventListener('DOMContentLoaded', alertMessageHide);
+document.addEventListener('DOMContentLoaded', alertErrorHide);
+
+
+

@@ -22,7 +22,7 @@ public class EmailService  {
 		this.javaMailSender = javaMailSender;
 	}
 	
-	public void sendMessage(String firstName, String lastName, String email, String activation) {
+	public String sendMessage(String firstName, String lastName, String email, String activation) {
 			SimpleMailMessage message=null;
 		try {
 			message= new SimpleMailMessage();
@@ -30,25 +30,25 @@ public class EmailService  {
 			message.setTo(email);
 			message.setSubject("Aktiváció");
 			message.setText("Kedves "+ lastName+ "!" 
-					+ "/n/n "
+					+ "\n\n "
 					+ "Örülök hogy regisztráltál az oldalamra. "
 					+ "Remélem elnyeri tetszésedet."
 					+ "Hogy az alkalmazásokat használhasd, kérlek regisztrálj az alábbi kóddal: " 
 					+ activation
-					+ "/n "
+					+ "\n "
 					+ "Bármilyen javaslatod van a látottakkal kapcsolatban,"
 					+ "kérlek jelezd nekem ezen az email címen."
-					+ "/n/n"
+					+ "\n\n"
 					+ "Köszönettel"
-					+ "/n"
+					+ "\n"
 					+ "Ádám"
 					);
 			javaMailSender.send(message);
 
 		} catch (Exception e) {
 			System.err.println("Hiba az email elküldése során erre a címre " + email);
-
+			return "Hiba az email elküldése során erre a címre " + email;
 		}
-		
+		return"Az aktivációs emailt sikeresen elküldtem!";
 	}
 }

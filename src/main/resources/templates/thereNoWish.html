@@ -19,6 +19,10 @@
       </ul>
 	</nav>
 	
+	<div layout:fragment= "search-bar">
+  <form th:action="@{/searchWish}" method="post">
+    <div class="search"><input class="search-box" type="text" name="query" placeholder="Keresés" ><button class="search-button" type="submit">Keresés</button></div>
+  </form>
 
 
 <div layout:fragment="thereNoWish" class="table">

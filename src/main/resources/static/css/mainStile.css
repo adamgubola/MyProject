@@ -130,6 +130,19 @@
 	background-color: #E6E6E6;
 	width: fit-content;
 }
+.alert-error{
+	display: block;
+	justify-content: center;
+	text-align: center;
+	margin: auto;
+	border-radius: 10px;
+	font-size: 16px;
+	padding: 10px;
+	color: green;
+	border: thin solid #7A7A7A;
+	background-color: #E6E6E6;
+	width: fit-content;
+}
 .search{
 	float: right;
 }
@@ -429,8 +442,15 @@
 	margin-top: 10px;
 		
 }
+.login{
+	margin-left: 40px;
+}
+.register{
+	margin-left: 40px;
+}
 
 .form-signin .form-signin-headin{
+	
 	margin-bottom: 10px;
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-style: italic;
