@@ -33,6 +33,7 @@ public class SecurityConfig {
 		   		.requestMatchers( "/js/**", "/css/**").permitAll()
 				.requestMatchers("/resources/**").permitAll()
 			   	.requestMatchers("/").permitAll()
+			   	.requestMatchers("/introduce").permitAll()
 			   	.requestMatchers("/login").permitAll()
 		   		.requestMatchers("/index").permitAll()
 		   		.requestMatchers("/reg").permitAll()
@@ -47,8 +48,19 @@ public class SecurityConfig {
 		   	
 		   	.logout(out->out
 		   			.logoutSuccessUrl("/login?logout").permitAll());
-		   		
-		   
+		    https
+		    	.headers(headers->headers
+		    	.contentSecurityPolicy(csp->csp
+		    			.policyDirectives("default-src 'self'; "
+		    						+ "script-src 'self' https://code.jquery.com https://localhost:8080; "
+		    						+ "style-src 'self' https://maxcdn.bootstrapcdn.com; "
+		    						+ "img-src 'self' https://localhost:8080; "
+		    						+ "frame-ancestors 'self' https://localhost:8080;"
+		    						+ "connect-src 'self' https://localhost:8080; "
+		    						+ "font-src 'self' https://maxcdn.bootstrapcdn.com; "
+		    						+ "object-src 'none';")
+		    			)
+		    	);
 		   return https.build();
 	   }
 	

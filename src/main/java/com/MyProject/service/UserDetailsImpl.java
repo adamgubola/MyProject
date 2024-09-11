@@ -47,6 +47,10 @@ public class UserDetailsImpl implements UserDetails {
 		return user.getEmail();
 	}
 	
+	public String getFullName() {
+		return user.getLastName() + " " + user.getFirstName();
+	}
+	
 	@Override
 	public boolean isEnabled() {
 		return user.getEnabled();

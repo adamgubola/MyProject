@@ -162,6 +162,18 @@
 	border-bottom-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
+.wish-description{
+	
+	padding: 15px;
+	font-family: "Source Sans Pro";
+	color: #020202;
+}
+
+.introduce-header{
+	font-family: "Source Sans Pro";
+	color: #838383;
+	text-align: center;
+}
 
 .primary_header {
 	width: 100%;
@@ -230,19 +242,19 @@
 	font-weight: bold;
 	text-transform: uppercase;
 }
-.container .left_article p {
+.container .left_article div {
 	padding-left: 5%;
 	padding-right: 5%;
 	text-align: justify;
 	line-height: 24px;
 	margin-top: 40px;
-	margin-bottom: 15px;
+	margin-bottom: 40px;
 	color: #B3B3B3;
 }
 .right_article {
 	margin-right: 30px;
 	width: 30%;
-	margin-top: 7px;
+	margin-top: 40px;
 	float: right;
 	height: 300;
 		
