@@ -26,14 +26,22 @@
     </div>
   </div>
   <div class="authenticationBar">
-    Üdvözlünk: <span sec:authentication="name"> Anonymous </span>
+  
+		<span sec:authorize="isAuthenticated()">
+        Üdvözlünk: <span sec:authentication="principal.fullName">Anonymous</span>
+   		 </span>         
+          <span sec:authorize="isAnonymous()">
+        Kérlek jelentkezz be!
+    	</span>
+         
          <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="">
         | <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Kijelentkezés</a>
       </form>
-    </div>
+   </div>
   <nav class="secondary_header" id="menu">
     <ul class="headLinks">
-      <li class="headLinks"><a href="/index">Bemutatkozás</a></li>
+      <li class="headLinks"><a href="/index">Főoldal</a></li>
+      <li><a href="/introduce">Bemutatkozás	</a></li>
       <li><a href="/login">Belépés</a></li>
       <li><a href="/registration">Regisztráció</a> </li>
       <li><a href="/wishes">Kívánságlista</a> </li>
@@ -46,12 +54,17 @@
   
   <div layout:fragment="search-bar"></div>
   <br/>
-  <section layout:fragment="introduce"></section>
+  <section layout:fragment="index"></section>
   <div layout:fragment="loginContent"></div>
   <div layout:fragment="register"></div>
   <div layout:fragment="wishes" > </div>
   <div layout:fragment="thereNoWish" > </div>
   <div layout:fragment="detailed-error"></div>
+  <div layout:fragment="introduce"></div>
+  
+  <div layout:fragment="introduce2"></div>
+  
+  
   
   <br/>
   <div class="social">

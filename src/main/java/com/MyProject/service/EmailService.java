@@ -28,20 +28,21 @@ public class EmailService  {
 			message= new SimpleMailMessage();
 			message.setFrom(MESSAGE_FROM);
 			message.setTo(email);
-			message.setSubject("Aktiváció");
+			message.setSubject("Aktiváló email");
 			message.setText("Kedves "+ lastName+ "!" 
 					+ "\n\n"
-					+ "Örülök hogy regisztráltál az oldalamra. "
+					+ "Örülök, hogy regisztráltál az oldalamra. "
 					+ "Remélem elnyeri tetszésedet."
-					+ "Hogy az alkalmazásokat használhasd, kérlek regisztrálj az alábbi kóddal: " 
-					+ activation
+					+ "Azért, hogy az alkalmazást használhasd, kérlek regisztrálj az alábbi kóddal: " 
+					+ activation 
 					+ "\n"
+					+ "A bejelentkezéshez az email címedre és a jelszavadra lesz szükséged."
 					+ "Bármilyen javaslatod van a látottakkal kapcsolatban,"
 					+ "kérlek jelezd nekem ezen az email címen."
 					+ "\n\n"
 					+ "Köszönettel"
 					+ "\n"
-					+ "Ádám"
+					+ "Gubola Ádám"
 					);
 			javaMailSender.send(message);
 			

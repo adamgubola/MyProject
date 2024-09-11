@@ -67,6 +67,11 @@ public class MainController {
 		return "auth/login";
 	}
 	
+	@GetMapping("/introduce")
+	public String introduce() {
+		return "introduce";
+	}
+	
 	@GetMapping("/registration")
 	public String registration(Model model) {
 		model.addAttribute("userDto", new UserDto());
