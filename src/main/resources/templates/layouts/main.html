@@ -35,8 +35,8 @@
     	</span>
          
          <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="">
-        | <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Kijelentkezés</a>
-      </form>
+    		<a href="#" id="logoutLink">Kijelentkezés</a>
+		</form>
    </div>
   <nav class="secondary_header" id="menu">
     <ul class="headLinks">
