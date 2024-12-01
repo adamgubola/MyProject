@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
+ application.properties
 .apt_generated
 .classpath
 .factorypath
@@ -31,3 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Kizárt fájlok
+*.properties
