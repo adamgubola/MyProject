@@ -107,11 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutLink = document.getElementById("logoutLink");
     const logoutForm = document.getElementById("frmlogout");
 
-    logoutLink.addEventListener("click", function (event) {
-        event.preventDefault();
-        if (logoutForm) {
+    if (logoutLink && logoutForm) { 
+        logoutLink.addEventListener("click", function (event) {
+            event.preventDefault();
             logoutForm.submit();
-        }
-    });
+        });
+    } else {
+        console.error("Az egyik elem hiányzik: logoutLink vagy frmlogout.");
+    }
 });
 

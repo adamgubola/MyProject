@@ -28,14 +28,14 @@
   <div class="authenticationBar">
   
 		<span sec:authorize="isAuthenticated()">
-        Üdvözlünk: <span sec:authentication="principal.fullName">Anonymous</span>
+        Üdvözlünk: <span sec:authentication="principal.fullName ">Anonymous</span>
    		 </span>         
           <span sec:authorize="isAnonymous()">
         Kérlek jelentkezz be!
     	</span>
          
          <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="">
-    		<a href="#" id="logoutLink">Kijelentkezés</a>
+    		<a href="#" id="logoutLink"> Kijelentkezés </a>
 		</form>
    </div>
   <nav class="secondary_header" id="menu">
