@@ -35,3 +35,4 @@ build/
 
 # Kizárt fájlok
 *.properties
+*.bak
