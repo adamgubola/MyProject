@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+
+<title>Gubola Ádám weboldala</title>
+<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+    <nav class="secondary_header" id="menu">
+      <ul class="headLinks">
+        <li class="headLinks">Bemutatkozás</li>
+        <li>Belépés</li>
+        <li>Regisztráció</li>
+      </ul>
+	</nav>
+	
+	<div layout:fragment= "search-bar">
+  <form th:action="@{/searchWish}" method="post">
+    <div class="search"><input class="search-box" type="text" name="query" placeholder="Keresés" ><button class="search-button" type="submit">Keresés</button></div>
+  </form>
+
+
+<div layout:fragment="thereNoWish" class="table">
+  <table  class="columnRow">
+    <tr class="table_header">
+      <th>Where i find it?</th>
+      <th>My wish</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>My saved money</th>
+    </tr>
+    <tr>
+      <td><div class="columns" >Aréna plázában</div></td>
+      <td><div class="columns" >Nike futócipő</div></td>
+      <td><div class="columns" >Fehér és kék színű</div></td>
+      <td><div class="columns" >33000 Ft</div></td>
+      <td><div class="columns" > 0 Ft</div></td>
+      <td><div><button class="columns-button"> Törlés </button></div> </td>
+    </tr>
+	<form name="addWish" th:action="@{/addWish}" th:object="${wish}" method="post" >
+      <tr>
+        <td><div>
+        <input type="text" id="place" name="place" th:field="*{place}" class="columns-input" placeholder="Where i find it?"/>        
+        </div></td>
+        <td>
+        <div><input type="text" id="what" name="what" th:field="*{what}" class="columns-input" placeholder="My wish"/>
+        </div></td>
+        <td>
+        <div><input type="text" id="description" name="description" th:field="*{description}" class="columns-input" placeholder="Description"/>
+        </div></td>
+        <td>
+        <div><input type="number" id="price" name="price" th:field="*{price}" class="columns-input" placeholder="Price"/>
+        <p th:if="${#fields.hasErrors('price')}" class="alert alert-danger" th:errors="*{price}"></p>
+        </div></td>
+        <td>
+        <div><input type="number" id="savedMoney" name="savedMoney" th:field="*{savedMoney}" class="columns-input" placeholder="My saved money"/>
+        <p th:if="${#fields.hasErrors('savedMoney')}" class="alert alert-danger" th:errors="*{savedMoney}"></p>
+        </div></td>
+        <td>
+        <div><button class="columns-button" type="submit"> Hozzáadás a kívánságlistához </button>
+        </div></td>
+      </tr>
+      </form>
+
+  </table>
+</div>
+  
+  <footer class="secondary_header footer">
+    <div class="copyright">&copy;2024 - <strong>Gubola Ádám honlapja</strong></div>
+  </footer>
+</div>
+</body>
+</html>

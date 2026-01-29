@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+
+<title>Simple Theme</title>
+<link href="../../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+    <nav class="secondary_header" id="menu">
+      <ul class="headLinks">
+        <li class="headLinks">Bemutatkozás</li>
+        <li>Belépés</li>
+        <li>Regisztráció</li>
+      </ul>
+	</nav>
+	
+		
+	<div layout:fragment="loginContent" class="login">
+
+		<form name="login" th:action="@{/login}" method="post" class="form-signin">
+			<h2 class="form-signin-heading">Kérlek jelentkezz be</h2>
+			<div id="err" th:if="${param.error}" class="alert alert-danger">Hibás felhasználói név és jelszó</div>
+			<div th:if="${param.logout}" class="alert alert-success">Sikeresen kijelentkeztél</div>
+			<label for="username" class="sr-only">Felhasználói név</label> 
+			    <input type="text" id="username" name="username" class="form-control" placeholder="Email cím" required="true" /> 
+			
+			<label for="password" class="sr-only">Jelszó</label> 
+			    <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó" required="true" />
+			<div class="checkbox">
+				<label> <input id="remember-me" name="remember-me" type="checkbox" /> Emlékezz rám
+				</label>
+			</div>
+			<button class="form-button" type="submit">Bejelentkezés</button>
+		</form>
+
+		<a href="/registration">Regisztrálni szeretnék</a>
+		<br/>
+		<a href="/activate">Az aktivációhoz kattints ide</a>
+
+	</div>
+  
+  <div class="social">
+    <p class="social_icon"><img src="../static/pictures/profession.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></p>
+    <p class="social_icon"><img src="../static/pictures/indeed.jpg" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></p>
+    <p class="social_icon"><img src="../static/pictures/facebook.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></p>
+  </div>
+  <footer class="secondary_header footer">
+    <div class="copyright">&copy;2024 - <strong>Gubola Ádám honlapja</strong></div>
+  </footer>
+</div>
+</body>
+</html>

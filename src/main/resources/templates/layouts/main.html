@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="hu"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<title>Gubola Ádám weboldala</title>
+<meta charset="utf-8">
+<link href="../../static/css/mainStile.css" th:href="@{/static/css/mainStile.css}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" 
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css}" />	
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+  </header>
+  <div class="time_date_bar">
+    <div class="time_left">
+        <p id="time"></p>
+    </div>
+    <div class="date_right" >
+        <p id="date"></p>
+    </div>
+  </div>
+  <div class="authenticationBar">
+  
+		<span sec:authorize="isAuthenticated()">
+        Üdvözlünk: <span sec:authentication="principal.fullName ">Anonymous</span>
+   		 </span>         
+          <span sec:authorize="isAnonymous()">
+        Kérlek jelentkezz be!
+    	</span>
+         
+         <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="">
+    		<a href="#" id="logoutLink"> Kijelentkezés </a>
+		</form>
+   </div>
+  <nav class="secondary_header" id="menu">
+    <ul class="headLinks">
+      <li class="headLinks"><a href="/index">Főoldal</a></li>
+      <li><a href="/introduce">Bemutatkozás	</a></li>
+      <li sec:authorize="isAnonymous()"><a href="/login">Belépés</a></li>
+      <li sec:authorize="isAnonymous()"><a href="/registration">Regisztráció</a> </li>
+      <li><a href="/wishes">Kívánságlista</a> </li>
+    </ul>
+  </nav>
+  
+  <div th:if="${messageFlash}" th:text="${messageFlash}" id="alert-message" class="alert-message"></div>
+  <div th:if="${errorFlash}" th:text="${errorFlash}" id="alert-error" class="alert-error"></div>
+  
+  
+  <div layout:fragment="search-bar"></div>
+  <br/>
+  <section layout:fragment="index"></section>
+  <div layout:fragment="loginContent"></div>
+  <div layout:fragment="register"></div>
+  <div layout:fragment="wishes" > </div>
+  <div layout:fragment="thereNoWish" > </div>
+  <div layout:fragment="detailed-error"></div>
+  <div layout:fragment="introduce"></div>
+  <div layout:fragment="introduce2"></div>
+  <div layout:fragment="hikIntegrationSystem"><</div>
+  
+  
+  
+  <br/>
+  <div class="social">
+  	
+    <p class="social_icon"><a href="https://www.linkedin.com/in/adam-gubola-136603307/" target="blank_"><img src="../../static/pictures/linkedin.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/> </a></p>
+       <p class="social_icon"><a href="https://github.com/adamgubola/MyProject" target="blank"><img src="../../static/pictures/Git.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
+    <p class="social_icon"><a href="https://www.facebook.com/adam.gubola.1" target="blank"> <img src="../../static/pictures/facebook.png" width="100" alt="Hiba a kép megjelenítése során" class="thumbnail"/></a></p>
+  </div>
+  <footer class="secondary_header footer">
+    <div class="copyright">&copy;2024 - <strong>Gubola Ádám honlapja</strong></div>
+  </footer>
+</div>
+<script src="../../static/js/script.js"></script>
+<script src="../../static/js/time.js"></script>
+
+</body>
+</html>

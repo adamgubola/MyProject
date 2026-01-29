@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+<title>Gubola Ádám weboldala</title>
+<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+  </header>
+    
+		
+	<div layout:fragment="detailed-error">
+		
+	   
+       <h1 th:text="'Az oldal betöltése során ez a hiba merült fel: '+ ${error}">Ez itt a gond</h1> 
+ 	   <section >
+            <p th:text="${message}">Ez az üzenet.</p>
+            <p th:text="'Ezt a linket próbáltad megnyitni: ' + ${path}">Elérési út.</p>
+            <p th:text="'A hiba kódja: ' + ${status}">Státusz</p>
+            <p th:text="'A hiba ekkor töltént: ' + ${timestamp}">Időpont</p>
+       </section>
+		
+
+	</div>
+  
+</div>
+</body>

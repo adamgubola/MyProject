@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+<title>Gubola Ádám weboldala</title>
+<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+	<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+  </header>
+    
+
+<div layout:fragment="introduce">
+
+<h3 class="introduce-header">
+Ezen az oldalon megtekinthed a magyar és az angol önéletrajzomat:
+</h3>
+<object
+        data="../static/pdf/Gubola_Ádám_Önéletrajz_2026_Magyar.pdf"
+        type="application/pdf"
+        width="100%"
+        height="600"
+        style="border:1px solid #ccc;"
+      >
+        <p>Ez a böngésző nem tudja megjeleníteni a PDF-et.  
+        <a href="../static/pdf/Gubola_Ádám_Önéletrajz_2026_Magyar.pdf" download>
+          Letöltés: Önéletrajz (magyar)
+        </a></p>
+      </object>
+
+      
+      <object
+        data="../static/pdf/Gubola_Ádám_CV_2026_English.pdf"
+        type="application/pdf"
+        width="100%"
+        height="600"
+        style="border:1px solid #ccc;"
+      >
+        <p>Ez a böngésző nem tudja megjeleníteni a PDF-et.  
+        <a href="../static/pdf/Gubola_Ádám_CV_2026_English.pdf" download>
+          Letöltés: CV (angol)
+        </a></p>
+      </object>
+
+</div>
+</div>
+
+</div>
+</body>
+</html>

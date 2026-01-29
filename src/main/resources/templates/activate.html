@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="hu" layout:decorate="~{layouts/main}">
+<head>
+
+<title>Gubola Ádám weboldala</title>
+<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+  <header>
+<div class="primary_header">
+      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
+    </div>
+    </header>
+    
+  
+	<div layout:fragment="loginContent">
+		
+		<form name="activate" th:action="@{/activ}" th:object="${user}" method="post" class="form-signin">
+			<h2 class="form-signin-heading">Kérlek aktiváld a fiókod</h2>
+			<input type="text" id="activation" name="activation" th:field="*{activation}" class="form-control" placeholder="Aktivációs kód"/>
+			<br/>
+			<button class="form-button" type="submit"> Aktiváció </button>
+
+		</form>
+		
+
+	</div>
+  
+
+</div>
+</body>
+</html>
