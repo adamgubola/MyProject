@@ -1,34 +1,42 @@
 <!doctype html>
 <html lang="hu" layout:decorate="~{layouts/main}">
 <head>
-<title>Gubola Ádám weboldala</title>
-<link href="../static/css/mainStile.css" rel="stylesheet" type="text/css">
-</head>
+    <title>Gubola Ádám weboldala - Hik Integráció</title>
+    </head>
 <body>
 <div class="container">
-  <header>
-<div class="primary_header">
-      <h1 class="title"> Üdvözöllek bemutatkozó honlapomon!</h1>
-    </div>
-  </header>
     
-	
-  <section layout:fragment="hikIntegrationSystem">
-    <article class="left_article">
-      <h3>A honlap bemutatása</h3>
-      <div>
-      <p>Ezt a honlapot azért hoztam létre, hogy az elkészült és a jövőben elkészülő projektjeimnek olyan felületet biztosítson, amit az irántam érdeklődők meg tudnak tekinteni.</p>
-	    <p>A weboldalon regisztráció nélkül meg tudod tekinteni a főoldal, a regisztráció, az aktiváció és a bemutatkozás oldalakat.</p>
-	    <p>A regisztráció során az adataid egy PostgreSQL adatbázisban lesznek eltárolva, aminek segítségéval a későbbiekben be tudsz jelentkezni.
-	  	A bejelentkezés után jelenleg a kíváságlista alkalmazást tudod elérni, ami szintén adatbázisban fogja tárolni az általad megadott adatokat.</p>
-	    <p>A jövőben tovább szeretném bővíteni a weboldalt, hogy bemutathassam az általam tanultakat. Amennyiben ötleted vagy észrevételed van, kérlek jelezd az 
-	  	<a href="mailto:adamgubola@gmail.com?subjedct=Fejlesztési javaslat">adamgubola@gmail.com</a> email címen</p>
-		  <p>Remélem a látottak elnyerik tetszésed! </p>
-      </div>
+    <section layout:fragment="hikIntegrationSystem">
+        
+        <header>
+            <div class="primary_header">
+                <h1 class="title">Hikvision Rendszer Integráció</h1>
+            </div>
+        </header>
 
-    </article>
-    <aside class="right_article"><img src="../static/pictures/fekete háttér fogaskerékkel2.jpg" alt="Hiba a kép betöltése közben" width="" height="300"  /> </aside>
-  </section>
+        <article class="left_article">
+            <div style="padding: 20px; background-color: #f8f9fa; border-left: 5px solid #0d6efd; margin-bottom: 20px;">
+                <h3>Fejlesztés alatt</h3>
+                <p>Ez a modul jelenleg fejlesztés alatt áll React alapokon.</p>
+                
+                <p>Mivel a fejlesztői környezetben vagyunk, a Java szerver (8080) és a React kliens (3000) külön fut.</p>
+                
+                <a href="http://localhost:3000" target="_blank" 
+                   style="display: inline-block; padding: 10px 20px; background-color: #0d6efd; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                    Ugrás a React Felületre (Port 3000)
+                </a>
+            </div>
+            
+            <p>Itt fog megjelenni a riasztórendszer térképe és kezelőfelülete.</p>
+        </article>
+
+        <aside class="right_article">
+            <img src="../static/pictures/fekete háttér fogaskerékkel2.jpg" 
+                 th:src="@{/pictures/fekete háttér fogaskerékkel2.jpg}" 
+                 alt="Rendszer integráció" width="100%" /> 
+        </aside>
+        
+    </section>
 
 </div>
 </body>

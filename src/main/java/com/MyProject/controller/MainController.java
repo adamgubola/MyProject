@@ -25,7 +25,6 @@ import com.MyProject.service.UserService;
 import com.MyProject.service.WishService;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class MainController {
@@ -204,12 +203,11 @@ public class MainController {
 			return "wishes";
 		}
 	}
-	
-	
-
-
-	
+	@GetMapping("/hikSystem/alarm")
+	public String hikSystem() {
+		return "hikIntegrationSystem";
 	}
+}
 	
 	
 
