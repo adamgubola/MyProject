@@ -27,7 +27,19 @@ public class SecurityConfig {
 	   @Bean
 	   SecurityFilterChain web (HttpSecurity https)throws Exception{
 		   
-		   https	
+		   https
+		   .cors(cors -> cors.configurationSource(request -> {
+                var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+                corsConfiguration.setAllowedOrigins(java.util.List.of("http://localhost:3000"));
+                corsConfiguration.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                corsConfiguration.setAllowedHeaders(java.util.List.of("*"));
+                corsConfiguration.setAllowCredentials(true);
+                return corsConfiguration;
+            }))
+			.csrf(csrf -> csrf
+                .ignoringRequestMatchers("/api/hikSystem/**")
+            )
+
 		   	.authorizeHttpRequests(authorize->authorize
 		   		.requestMatchers("/static/**").permitAll()
 		   		.requestMatchers( "/js/**", "/css/**").permitAll()
@@ -40,6 +52,7 @@ public class SecurityConfig {
 		   		.requestMatchers("/registration").permitAll()
 		   		.requestMatchers("/activate").permitAll()
 		   		.requestMatchers("/activ").permitAll()
+				.requestMatchers("/api/hikSystem/**").permitAll()
 		   		
 		   		.anyRequest().authenticated())
 		   	

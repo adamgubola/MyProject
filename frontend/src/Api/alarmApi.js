@@ -1,6 +1,7 @@
 const BASE_URL = "/api/hikSystem";
 
 export const fetchZones = async (filter = 'all') => {
+
         const endpoints = {
             'all': 'listAllZones',
             'armed': 'listArmedZones',
@@ -11,7 +12,11 @@ export const fetchZones = async (filter = 'all') => {
         const endpoint = endpoints[filter] || endpoints['all'];
 
         try {
-            const response = await fetch(`${BASE_URL}/${endpoint}`);
+            const response = await fetch(`${BASE_URL}/${endpoint}`, {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include'
+            });
             if (!response.ok) {
                 throw new Error(`Failed to fetch zones with filter: ${filter}`);
             }
@@ -25,6 +30,8 @@ export const sendCommand = async (command, zoneId) => {
     try {
         const response = await fetch(`${BASE_URL}/${command}/${zoneId}`, {
             method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: 'include'
         });
         if(!response.ok) {
             throw new Error(`Failed to execute command: ${command}`);

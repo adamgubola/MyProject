@@ -64,9 +64,9 @@ public class HikSystemController {
     public ResponseEntity<String> listDisarmedZones(){
         return executeCommand("LIST_DISARMED_ZONES");
     }
-    @GetMapping("/listArmingZones")
-    public ResponseEntity<String> listArmingZones(){
-        return executeCommand("LIST_ARMING_ZONES");
+    @GetMapping("/listAlarmingZones")
+    public ResponseEntity<String> listAlarmingZones(){
+        return executeCommand("LIST_ALARMING_ZONES");
     }
     @PostMapping("/listOneZone/{id}")
     public ResponseEntity<String> listOneZone(@PathVariable int id){
