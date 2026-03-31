@@ -40,7 +40,7 @@ public class HikSystemService {
 
             if (response == null) {
                 logger.warn("No response received from Hik-System");
-                return "Error: No response received from Hik Simulator";
+                return "Error: No response received from Hik-System";
             }
 
             logger.info("Received response from Hik-System: " + response);

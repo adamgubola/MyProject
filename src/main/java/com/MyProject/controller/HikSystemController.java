@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.MyProject.service.HikSystemService;
 
 
+
 @RestController
 @RequestMapping("/api/hikSystem")
 public class HikSystemController {
@@ -72,6 +73,20 @@ public class HikSystemController {
     public ResponseEntity<String> listOneZone(@PathVariable int id){
         return executeCommand("LIST_ONE_ZONE:" + id);
     }
+    @PostMapping("/armPartition/{id}")
+    public ResponseEntity<String> armPartition(@PathVariable int id){
+        return executeCommand("ARM_PARTITION:" + id);
+    }
+    @PostMapping("/disarmPartition/{id}")
+    public ResponseEntity<String> disarmPartition(@PathVariable int id){
+        return executeCommand("DISARM_PARTITION:" + id);
+    }
+    @GetMapping("/listPartitions")
+    public ResponseEntity<String> listPartitions(){
+        return executeCommand("LIST_PARTITIONS");
+    }
+
+    
 
     @SuppressWarnings("null")
     private ResponseEntity<String> executeCommand(String command) {

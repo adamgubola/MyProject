@@ -1,17 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
-import { fetchZones, sendCommand } from "../api/alarmApi";
+import { fetchZones, fetchPartitions, sendZoneCommand, sendPartitionCommand } from "../api/alarmApi";
 
 export const useHikSystem = (initialFilter = 'all') => {
     const [zones, setZones] = useState([]);
+    const [partitions, setPartitions] = useState([]);
     const [filter, setFilter] = useState(initialFilter);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const refreshZones = useCallback(async () => {
+    const refreshSystem = useCallback(async () => {
         setLoading(true);
         try {
-            const data = await fetchZones(filter);
-            setZones(data);
+            const [zonesData, partitinsData] = await Promise.all(
+                [fetchZones(filter),
+                 fetchPartitions()
+                ]);
+            setZones(zonesData);
+            setPartitions(partitinsData)
             setError(null);
         }catch (err) {
             setError(err.message);
@@ -21,19 +26,34 @@ export const useHikSystem = (initialFilter = 'all') => {
     }, [filter]);
 
     useEffect(() => {
-        refreshZones();
-    }, [refreshZones]);
+        refreshSystem();
+    }, [refreshSystem]);
 
-    const executeCommand = async (command, zoneId) => {
+    const executeZoneCommand = async (command, zoneId) => {
         setLoading(true);
         try {
-            const result = await sendCommand(command, zoneId);
+            const result = await sendZoneCommand(command, zoneId);
             if(result && result.status !== "Error") {
-                await refreshZones();
-                return true;
+                await refreshSystem();
             }else{
                 setError(result.message || "Unknown error executing command");
-                return false;
+            }
+        }
+        catch (err) {
+            setError("Error executing command: " + err.message);
+            return false;
+        }finally {
+            setLoading(false);
+        }
+    };
+        const executePartitionCommand = async (command, partitionId) => {
+        setLoading(true);
+        try {
+            const result = await sendPartitionCommand(command, partitionId);
+            if(result && result.status !== "Error") {
+                await refreshSystem();
+            }else{
+                setError(result.message || "Unknown error executing partition command");
             }
         }
         catch (err) {
@@ -45,11 +65,13 @@ export const useHikSystem = (initialFilter = 'all') => {
     };
     return {
         zones,
+        partitions,
         filter,
         error,
         loading,
         setFilter,
-        refreshZones,
-        executeCommand
+        refreshSystem,
+        executeZoneCommand,
+        executePartitionCommand
     };
 };

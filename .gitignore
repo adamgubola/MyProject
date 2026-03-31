@@ -35,6 +35,7 @@ application.properties
 
 # VS Code
 .vscode/
+.env
 
 # Config és sensitive fájlok
 *.properties

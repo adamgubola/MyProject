@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ZoneList from './components/ZoneList';
+import AlarmDashboard from './components/AlarmDashboard';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <p>Vezérlőpult</p>
       </header>
       <main className="container">
-        <ZoneList />
+        <AlarmDashboard/>
       </main>
 
       <footer className="bg-light text-center p-3 mt-4 shadow">

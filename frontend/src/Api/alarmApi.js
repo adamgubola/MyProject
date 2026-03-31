@@ -7,7 +7,7 @@ export const fetchZones = async (filter = 'all') => {
             'armed': 'listArmedZones',
             'disarmed': 'listDisarmedZones',
             'bypassed': 'listBypassedZones',
-            'alarming': 'listAlarmingZones'
+            'alarming': 'listAlarmingZones',
         };
         const endpoint = endpoints[filter] || endpoints['all'];
 
@@ -26,7 +26,26 @@ export const fetchZones = async (filter = 'all') => {
             return [];
     }
 };
-export const sendCommand = async (command, zoneId) => {
+export const fetchPartitions = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/listPartitions`, {
+                     method: 'GET',
+                     headers: {'Content-Type': 'application/json'},
+                      credentials: 'include'
+                 });
+                 if (!response.ok) {
+                    throw new Error('Failed to fetch partitions');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error("Error fetching partitions:", error);
+                return [];
+    }
+};
+
+
+
+export const sendZoneCommand = async (command, zoneId) => {
     try {
         const response = await fetch(`${BASE_URL}/${command}/${zoneId}`, {
             method: "POST",
@@ -34,7 +53,23 @@ export const sendCommand = async (command, zoneId) => {
             credentials: 'include'
         });
         if(!response.ok) {
-            throw new Error(`Failed to execute command: ${command}`);
+            throw new Error(`Failed to execute zone command: ${command}`);
+        } 
+        return await response.json();
+    } catch (error) {
+        console.error(`Error executing command ${command}:`, error);
+        return {status: "Error", message: error.message};
+    }
+};
+export const sendPartitionCommand = async (command, partitionId) => {
+     try {
+        const response = await fetch(`${BASE_URL}/${command}/${partitionId}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: 'include'
+        });
+        if(!response.ok) {
+            throw new Error(`Failed to execute partition command: ${command}`);
         } 
         return await response.json();
     } catch (error) {
